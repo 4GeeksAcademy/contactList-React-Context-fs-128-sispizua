@@ -24,4 +24,16 @@
 .buttonsCard{
     display: flex;
     gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    
+}
+
+.iconContact{
+    background: transparent;
+    border:none;
+    color: black;
+}
+.iconContact:hover{
+  opacity: 0.75;
 }

@@ -2,7 +2,7 @@ import "../styles/contactCard.css"
 import { Link } from "react-router-dom";
 
 
-export const ContactCard = ({ contact }) => {
+export const ContactCard = ({ contact, onDelete }) => {
 
     return (
         <div className="conteiner conteiner-fluid CardBody">
@@ -17,23 +17,27 @@ export const ContactCard = ({ contact }) => {
                     <p><i className="fa-solid fa-house"></i> : {contact.address} </p>
                 </div>
                 <div className="buttonsCard">
-                    <Link to={`/edit/${contact.id}`}>
-                        <button type="button"><i className="fa-solid fa-pencil"></i></button>
+                    <Link to={`/edit/${contact.id}`} className="iconContact" aria-label={`Edit ${contact.name}`} >
+                        <i className="fa-regular fa-pen-to-square iconContact"></i>
                     </Link>
                     <button
                         type="button"
-                        className="btn"
+                        className="iconContact"
                         data-bs-toggle="modal"
-                        data-bs-target={`$modal-${contact.id}`}
-                        arial-label={`Delete ${contact.name}`} >
-                        <i className="fa-solid fa-trash-can"></i>
+                        data-bs-target={`#modal-${contact.id}`}
+                        aria-label={`Delete ${contact.name}`}>
+                        <i className="fa-solid fa-trash-can iconContact"></i>
                     </button>
                 </div>
-                <div className="modal" id={`modal-${contact.id}`} tabindex="-1" arial-labelledy={`modalLabel-${contact.id}`}>
+
+                
+                <div className="modal fade" id={`modal-${contact.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${contact.id}`} aria-hidden="true">
                     <div className="modal-dialog">
-                        <div className="modal-content" id={`modalLabel-${contact.id}`}>
+                        <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Modal title</h5>
+                                <h5 className="modal-title" id={`modalLabel-${contact.id}`}>
+                                    Delete contact
+                                </h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
@@ -41,7 +45,7 @@ export const ContactCard = ({ contact }) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Delete</button>
+                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(e)=>{onDelete(); e.currentTarget.blur(); }} >Delete</button>
                             </div>
                         </div>
                     </div>

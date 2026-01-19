@@ -26,14 +26,21 @@ export const createContact = async (dispatch, contact) => {
             "Content-Type": "application/json"
         }
     });
+    if (!response.ok) {
+        throw new Error("Error creating contact");
+    }
     const data = await response.json()
     dispatch({ type: 'add_contact', payload: data })
+    return data;
 };
 
 export const deleteContact = async (dispatch, id)=>{
     const response = await fetch(`https://playground.4geeks.com/contact/agendas/santiago/contacts/${id}`,
        { method:"DELETE"}
     );
+    if (!response.ok){
+       throw new Error("Error deleting contact"); 
+    } 
     dispatch({type:"delete_contact", payload: id});
 }
 
